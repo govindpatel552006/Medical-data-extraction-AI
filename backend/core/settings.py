@@ -140,11 +140,18 @@ SIMPLE_JWT = {
 # ------------------------------------------------------------------
 # CORS
 # ------------------------------------------------------------------
+def _normalize_origin(url):
+    if not url:
+        return None
+    if not url.startswith('http://') and not url.startswith('https://'):
+        url = f'https://{url}'
+    return url.rstrip('/')
+
 CORS_ALLOWED_ORIGINS = [
     origin for origin in [
         "http://localhost:5173",
         "http://127.0.0.1:5173",
-        os.environ.get('FRONTEND_URL', ''),
+        _normalize_origin(os.environ.get('FRONTEND_URL', '')),
     ] if origin
 ]
 
