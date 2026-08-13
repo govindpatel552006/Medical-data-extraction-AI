@@ -14,6 +14,10 @@ export const getMyPrescriptions = async () => {
     return response.data;
 };
 
+export const deletePrescription = async (id) => {
+    await axiosInstance.delete(`/prescriptions/${id}/delete/`);
+};
+
 export const generateDietPlan = async (prescriptionId, force = false) => {
     const response = await axiosInstance.post(
         `/dietplan/generate/${prescriptionId}/${force ? '?force=true' : ''}`

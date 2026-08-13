@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import DashboardLayout from '../components/DashboardLayout';
 import { uploadPrescription } from '../api/prescriptions';
 import toast from 'react-hot-toast';
 import './Upload.css';
@@ -36,8 +36,7 @@ export default function UploadPrescription() {
     };
 
     return (
-        <div>
-            <Navbar />
+        <DashboardLayout>
             <div className="upload-container">
                 <h1>Scan a prescription</h1>
                 <p className="upload-subtitle">
@@ -64,6 +63,6 @@ export default function UploadPrescription() {
                     {uploading ? 'Reading your report…' : 'Generate my plan'}
                 </button>
             </div>
-        </div>
+        </DashboardLayout>
     );
 }

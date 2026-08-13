@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import DashboardLayout from '../components/DashboardLayout';
 import WeekRibbon from '../components/WeekRibbon';
 import { getMyPrescriptions, generateDietPlan } from '../api/prescriptions';
 import toast from 'react-hot-toast';
@@ -33,19 +33,17 @@ export default function ReportResult() {
 
     if (loading) {
         return (
-            <div>
-                <Navbar />
+            <DashboardLayout>
                 <p className="report-loading">Reading your report…</p>
-            </div>
+            </DashboardLayout>
         );
     }
 
     if (!prescription || !dietPlan) {
         return (
-            <div>
-                <Navbar />
+            <DashboardLayout>
                 <p className="report-loading">Report not found.</p>
-            </div>
+            </DashboardLayout>
         );
     }
 
@@ -53,8 +51,7 @@ export default function ReportResult() {
     const dayPlan = dietPlan.plan_data.days[dayKey];
 
     return (
-        <div>
-            <Navbar />
+        <DashboardLayout>
             <div className="report-container">
                 <div className="report-top">
                     <div className="report-left">
@@ -115,6 +112,6 @@ export default function ReportResult() {
                     ))}
                 </div>
             </div>
-        </div>
+        </DashboardLayout>
     );
 }

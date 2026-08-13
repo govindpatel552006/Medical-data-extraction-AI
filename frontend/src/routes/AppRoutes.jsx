@@ -2,6 +2,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
+import Records from '../pages/Records';
+import Profile from '../pages/Profile';
 import UploadPrescription from '../pages/UploadPrescription';
 import ReportResult from '../pages/ReportResult';
 import PublicPatientRecord from '../pages/PublicPatientRecord';
@@ -14,6 +16,8 @@ export default function AppRoutes() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+            <Route path="/records" element={<ProtectedRoute><Records /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/upload" element={<ProtectedRoute><UploadPrescription /></ProtectedRoute>} />
             <Route path="/report/:id" element={<ProtectedRoute><ReportResult /></ProtectedRoute>} />
             <Route path="/record/:token" element={<PublicPatientRecord />} />

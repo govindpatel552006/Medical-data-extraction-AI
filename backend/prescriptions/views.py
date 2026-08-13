@@ -70,3 +70,11 @@ class PublicPrescriptionView(APIView):
 
         serializer = PublicPrescriptionSerializer(prescription)
         return Response(serializer.data, status=status.HTTP_200_OK)
+class PrescriptionDeleteView(generics.DestroyAPIView):
+    """
+    DELETE /api/prescriptions/<uuid:pk>/delete/
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Prescription.objects.filter(patient=self.request.user)

@@ -1,0 +1,107 @@
+.sidebar {
+    width: 240px;
+    min-height: 100vh;
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    padding: 28px 20px;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-size: 18px;
+    margin-bottom: 40px;
+    padding: 0 8px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.sidebar-link {
+    padding: 11px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-muted);
+}
+
+.sidebar-link:hover {
+    background: var(--color-bg);
+    color: var(--color-ink);
+}
+
+.sidebar-link.active {
+    background: var(--color-primary);
+    color: white;
+}
+
+.sidebar-footer {
+    border-top: 1px solid var(--color-border);
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar-user {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 8px;
+}
+
+.sidebar-user-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-ink);
+}
+
+.sidebar-user-email {
+    font-size: 12px;
+    color: var(--color-muted);
+}
+
+.sidebar-logout {
+    background: transparent;
+    border: 1.5px solid var(--color-border);
+    color: var(--color-primary);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px;
+    border-radius: var(--radius-sm);
+}
+
+.sidebar-logout:hover {
+    border-color: var(--color-primary);
+}
+
+@media (max-width: 760px) {
+    .app-shell {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+    }
+    .sidebar-nav {
+        flex-direction: row;
+    }
+    .sidebar-footer {
+        display: none;
+    }
+}

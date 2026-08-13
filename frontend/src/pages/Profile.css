@@ -1,0 +1,55 @@
+.profile-container {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+
+.profile-container h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.profile-form {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.profile-form input,
+.profile-form select,
+.profile-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-ink);
+}
+
+.profile-form input:disabled {
+    background: var(--color-bg);
+    color: var(--color-muted);
+}
+
+.profile-form input:focus,
+.profile-form select:focus,
+.profile-form textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.profile-form .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.profile-form textarea {
+    min-height: 70px;
+    resize: vertical;
+}
+
+.profile-form button {
+    margin-top: 8px;
+}
