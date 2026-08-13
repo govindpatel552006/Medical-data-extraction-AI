@@ -5,17 +5,18 @@ Django settings for core project.
 from pathlib import Path
 from datetime import timedelta
 import os
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ------------------------------------------------------------------
 # SECURITY
 # ------------------------------------------------------------------
-SECRET_KEY = 'django-insecure-CHANGE-THIS-LATER-BEFORE-DEPLOY'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-CHANGE-THIS-LATER-BEFORE-DEPLOY')
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']  # tighten this before deployment
+ALLOWED_HOSTS = ['*']  # we'll tighten this once we have the Render URL
 
 # ------------------------------------------------------------------
 # APPLICATIONS
@@ -28,12 +29,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Third party
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
 
-    # Local apps
     'accounts',
     'prescriptions',
     'dietplan',
@@ -41,7 +40,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware',   # must be high up, before CommonMiddleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,13 +71,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 # ------------------------------------------------------------------
-# DATABASE (SQLite for development)
+# DATABASE
 # ------------------------------------------------------------------
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL', f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+        conn_max_age=600
+    )
 }
 
 # ------------------------------------------------------------------
@@ -108,6 +108,11 @@ USE_TZ = True
 # ------------------------------------------------------------------
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -133,11 +138,14 @@ SIMPLE_JWT = {
 }
 
 # ------------------------------------------------------------------
-# CORS (allow React dev server)
+# CORS
 # ------------------------------------------------------------------
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
+    origin for origin in [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        os.environ.get('FRONTEND_URL', ''),
+    ] if origin
 ]
 
 CORS_ALLOW_CREDENTIALS = True
