@@ -1,0 +1,102 @@
+.public-page {
+    min-height: 100vh;
+    background: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 20px;
+}
+
+.public-status {
+    color: var(--color-muted);
+    margin-top: 60px;
+}
+
+.public-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--color-primary);
+    margin-bottom: 28px;
+}
+
+.public-card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-md);
+}
+
+.public-patient-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.public-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.public-patient-row h2 {
+    font-size: 22px;
+}
+
+.public-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--color-muted);
+}
+
+.public-section {
+    margin-bottom: 20px;
+}
+
+.public-ocr {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    color: var(--color-ink);
+    margin-top: 8px;
+}
+
+.public-footer {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-muted);
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+}
+
+.public-error h2 {
+    margin-bottom: 8px;
+}
+
+.public-error p {
+    color: var(--color-muted);
+}
+
+.public-disclaimer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--color-muted);
+    text-align: center;
+    max-width: 400px;
+}
