@@ -5,5 +5,8 @@ apt-get update && apt-get install -y tesseract-ocr
 
 pip install -r requirements.txt
 
+mkdir -p media/prescriptions
+mkdir -p media/qrcodes
+
 python manage.py collectstatic --noinput
 python manage.py migrate
