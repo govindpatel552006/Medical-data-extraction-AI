@@ -11,8 +11,7 @@ from .serializers import (
 )
 from .ocr_utils import extract_text_from_image
 from .qr_utils import generate_qr_code
-
-FRONTEND_BASE_URL = "medical-data-extraction-ai-17s3-7awic5l7z.vercel.app"  # change this when you deploy
+FRONTEND_BASE_URL = "https://medical-data-extraction-ai-17s3.vercel.app"  # change this when you deploy
 
 
 class PrescriptionUploadView(generics.CreateAPIView):
