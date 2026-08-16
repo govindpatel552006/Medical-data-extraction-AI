@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://medical-data-extraction-ai-1.onrender.com';
+const API_BASE_URL = 'https://medical-data-extraction-ai-1.onrender.com/api';
 
 const axiosInstance = axios.create({
     baseURL: API_BASE_URL,
