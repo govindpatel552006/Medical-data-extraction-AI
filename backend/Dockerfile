@@ -1,7 +1,14 @@
 FROM python:3.11-slim
 
-# Install system dependencies including Tesseract OCR
-RUN mkdir -p media/prescriptions media/qrcodes
+RUN apt-get update && apt-get install -y \
+    tesseract-ocr \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Verify tesseract installed correctly and print its path (visible in build logs)
+RUN which tesseract && tesseract --version
+
 WORKDIR /app
 
 COPY requirements.txt .
@@ -9,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN mkdir -p media/prescriptions media/qrcodes staticfiles
+RUN mkdir -p media/prescriptions media/qrcodes
 
 RUN python manage.py collectstatic --noinput
 
