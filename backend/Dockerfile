@@ -1,12 +1,7 @@
 FROM python:3.11-slim
 
 # Install system dependencies including Tesseract OCR
-RUN apt-get update && apt-get install -y \
-    tesseract-ocr \
-    libpq-dev \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
-
+RUN mkdir -p media/prescriptions media/qrcodes
 WORKDIR /app
 
 COPY requirements.txt .

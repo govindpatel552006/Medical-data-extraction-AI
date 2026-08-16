@@ -1,7 +1,6 @@
 """
 Django settings for core project.
 """
-
 from pathlib import Path
 from datetime import timedelta
 import os
@@ -18,7 +17,6 @@ CLOUDINARY_STORAGE = {
 # SECURITY
 # ------------------------------------------------------------------
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-CHANGE-THIS-LATER-BEFORE-DEPLOY')
-
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*']  # we'll tighten this once we have the Render URL
@@ -121,10 +119,9 @@ STORAGES = {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
