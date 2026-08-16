@@ -8,23 +8,24 @@ if platform.system() == 'Windows':
 elif shutil.which('tesseract'):
     pytesseract.pytesseract.tesseract_cmd = shutil.which('tesseract')
 
-MAX_DIMENSION = 1600  # cap image size to keep OCR fast and light on memory
+MAX_DIMENSION = 1600
 
 
-def extract_text_from_image(file_path):
+def extract_text_from_image_file(file_obj):
     """
-    Takes a file path to an image, returns extracted text.
-    Downscales large images first to avoid timeouts/OOM on
-    memory-constrained hosting (e.g. Render free tier).
+    Takes a Django uploaded file object (in-memory or temp file) and
+    returns extracted text. Works regardless of storage backend since
+    it never touches .path — reads directly from the file stream.
     """
     try:
-        image = Image.open(file_path)
+        file_obj.seek(0)
+        image = Image.open(file_obj)
 
-        # Downscale if the image is larger than MAX_DIMENSION on either side
         if max(image.size) > MAX_DIMENSION:
             image.thumbnail((MAX_DIMENSION, MAX_DIMENSION), Image.LANCZOS)
 
         text = pytesseract.image_to_string(image)
+        file_obj.seek(0)  # reset pointer so it can still be saved to storage afterward
         return text.strip()
     except Exception as e:
         return f"OCR_ERROR: {str(e)}"
